@@ -47,9 +47,14 @@ class GMusicBackend(
         self.uri_schemes = ['gmusic']
 
     def on_start(self):
-        self.session.login(self.config['gmusic']['initial_code'],
+  
+
+	# Login retry
+	self._refresh_library_timer = RepeatingTimer(
+            self.session.login(self.config['gmusic']['initial_code'],
                            self.config['gmusic']['refresh_token'],
-                           self.config['gmusic']['deviceid'])
+                           self.config['gmusic']['deviceid']),
+            4000)
 
         # wait a few seconds to let mopidy settle
         # then refresh google music content asynchronously

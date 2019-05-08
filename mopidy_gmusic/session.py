@@ -57,7 +57,7 @@ class GMusicSession(object):
 
     def login(self, initial_code, refresh_token, device_id):
         if self.api.is_authenticated():
-            self.api.logout()
+            return
 
         if device_id is None or device_id == "mac":
             device_id = gmusicapi.Mobileclient.FROM_MAC_ADDRESS
