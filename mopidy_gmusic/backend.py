@@ -51,9 +51,7 @@ class GMusicBackend(
 
 	# Login retry
 	self._login_timer = RepeatingTimer(
-            self.session.login(self.config['gmusic']['initial_code'],
-                           self.config['gmusic']['refresh_token'],
-                           self.config['gmusic']['deviceid']),
+	    self._refresh_login,
             4000)
 	self._login_timer.start()
         # wait a few seconds to let mopidy settle
@@ -97,3 +95,9 @@ class GMusicBackend(
             self.playlists.refresh()
             t = round(time.time()) - t0
             logger.info('Finished refreshing Google Music playlists in %ds', t)
+
+    def _refresh_login(self):
+	    self.session.login(self.config['gmusic']['initial_code'],
+                           self.config['gmusic']['refresh_token'],
+                           self.config['gmusic']['deviceid']),
+
