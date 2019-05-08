@@ -50,7 +50,7 @@ class GMusicBackend(
   
 
 	# Login retry
-	self._refresh_library_timer = RepeatingTimer(
+	self._login_timer = RepeatingTimer(
             self.session.login(self.config['gmusic']['initial_code'],
                            self.config['gmusic']['refresh_token'],
                            self.config['gmusic']['deviceid']),
