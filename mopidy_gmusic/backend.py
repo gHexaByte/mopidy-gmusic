@@ -52,7 +52,7 @@ class GMusicBackend(
 	# Login retry
 	self._login_timer = RepeatingTimer(
 	    self._refresh_login,
-            4000)
+            1)
 	self._login_timer.start()
         # wait a few seconds to let mopidy settle
         # then refresh google music content asynchronously
